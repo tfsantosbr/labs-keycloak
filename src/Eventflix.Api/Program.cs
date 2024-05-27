@@ -1,5 +1,6 @@
 using Eventflix.Api.Application.Events.UseCases;
 using Eventflix.Api.Application.Organizations.UseCases;
+using Eventflix.Api.Application.Tickets.UseCases;
 using Eventflix.Api.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ builder.Services.AddListOrganizations();
 builder.Services.AddCreateEvent();
 builder.Services.AddListOrganizationEvents();
 builder.Services.AddListEvents();
+builder.Services.AddCreateTicket();
 
 var app = builder.Build();
 
@@ -27,5 +29,6 @@ app.UseListOrganizations();
 app.UseCreateEvent();
 app.UseListOrganizationEvents();
 app.UseListEvents();
+app.UseCreateTicket();
 
 app.Run();

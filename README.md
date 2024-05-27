@@ -5,6 +5,7 @@
 | User Type | Role                      | Use Case                          |
 |-----------|---------------------------|-----------------------------------|
 | admin     | create-organization       | Create organization               |
+| admin     | list-organizations        | List created organizations        |
 | manager   | create-event              | Create event                      |
 | manager   | list-ordanization-events  | List organization created events  |
 | manager   | update-event              | Update event                      |
