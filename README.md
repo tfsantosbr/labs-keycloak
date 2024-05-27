@@ -22,6 +22,6 @@
 | Username              | User Type |
 |-----------------------|-----------|
 | admin@email.com       | admin     |
-| manager-a@email.com   | manager   |
-| manager-b@email.com   | manager   |
+| mario@email.com       | manager   |
+| sonic@email.com       | manager   |
 | customer@email.com    | admin     |
