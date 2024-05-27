@@ -1,0 +1,6 @@
+@Eventflix.Api_HostAddress = http://localhost:5124
+
+GET {{Eventflix.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
