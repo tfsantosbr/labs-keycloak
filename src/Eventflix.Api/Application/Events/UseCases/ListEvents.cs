@@ -16,7 +16,8 @@ public static class ListEvents
         app.MapGet("events", async (IHandler<Request, IEnumerable<Response>> handler) =>
         {
             return await handler.Handle(new Request());
-        });
+        })
+        .RequireAuthorization();
     }
 
     public class Handler(ApplicationDbContext dbContext) : IHandler<Request, IEnumerable<Response>>

@@ -2,6 +2,9 @@ using Eventflix.Api.Application.Events.UseCases;
 using Eventflix.Api.Application.Organizations.UseCases;
 using Eventflix.Api.Application.Tickets.UseCases;
 using Eventflix.Api.Database;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +20,26 @@ builder.Services.AddCreateEvent();
 builder.Services.AddListOrganizationEvents();
 builder.Services.AddListEvents();
 builder.Services.AddCreateTicket();
+
+// Authentication ======================================================================================================
+
+builder.Services.AddAuthentication()
+    .AddJwtBearer(options =>
+    {
+        options.MetadataAddress = "http://localhost:8080/realms/eventflix/.well-known/openid-configuration";
+        options.Audience = "eventflix-backend";
+        options.RequireHttpsMetadata = false;
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.DefaultPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .RequireClaim("email_verified", "true")
+        .Build();
+});
+
+// =====================================================================================================================
 
 var app = builder.Build();
 
