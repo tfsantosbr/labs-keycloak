@@ -1,6 +1,7 @@
 using Eventflix.Api.Application.Events.UseCases;
 using Eventflix.Api.Application.Organizations.UseCases;
 using Eventflix.Api.Application.Tickets.UseCases;
+using Eventflix.Api.Authorization;
 using Eventflix.Api.Database;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -31,12 +32,17 @@ builder.Services.AddAuthentication()
         options.RequireHttpsMetadata = false;
     });
 
+builder.Services.AddSingleton<IAuthorizationHandler, RealmAccessRequirementHandler>();
+
 builder.Services.AddAuthorization(options =>
 {
     options.DefaultPolicy = new AuthorizationPolicyBuilder()
         .RequireAuthenticatedUser()
         .RequireClaim("email_verified", "true")
         .Build();
+
+    options.AddPolicy("list-events", policy => 
+        policy.RequireRealmRoles("list-events"));
 });
 
 // =====================================================================================================================

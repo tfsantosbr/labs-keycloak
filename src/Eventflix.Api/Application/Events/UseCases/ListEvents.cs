@@ -17,7 +17,7 @@ public static class ListEvents
         {
             return await handler.Handle(new Request());
         })
-        .RequireAuthorization();
+        .RequireAuthorization("list-events");
     }
 
     public class Handler(ApplicationDbContext dbContext) : IHandler<Request, IEnumerable<Response>>
